@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <ctype.h>
+
+int main(void) {
+    char password[100];
+    int length = 0;
+    int hasUpper = 0;
+    int hasLower = 0;
+    int hasDigit = 0;
+
+    printf("パスワードを入力してください: ");
+    scanf("%s", password);
+
+    // 文字列を1文字ずつ調べる
+    for (int i = 0; password[i] != '\0'; i++) {
+        length++;
+
+        if (isupper(password[i])) {
+            hasUpper = 1;
+        }
+        if (islower(password[i])) {
+            hasLower = 1;
+        }
+        if (isdigit(password[i])) {
+            hasDigit = 1;
+        }
+    }
+
+    // 判定
+    if (length >= 8 && hasUpper && hasLower && hasDigit) {
+        printf("強いパスワードです\n");
+    } else {
+        printf("強いパスワードではありません\n");
+        printf("改善点:\n");
+
+        if (length < 8) {
+            printf("・8文字以上にしてください\n");
+        }
+        if (!hasUpper) {
+            printf("・大文字を含めてください\n");
+        }
+        if (!hasLower) {
+            printf("・小文字を含めてください\n");
+        }
+        if (!hasDigit) {
+            printf("・数字を含めてください\n");
+        }
+    }
+
+    return 0;
+}
